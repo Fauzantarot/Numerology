@@ -161,6 +161,7 @@
                     </thead>
                     <tbody id="pinnacleBody"></tbody>
                 </table>
+                <div id="cycleList" style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;"></div>
             </div>
 
         </div>
@@ -169,67 +170,47 @@
     <script>
         // --- DATA INTERPRETASI (DATABASE) ---
         const interpretations = {
-            1: {
-                keyword: "Pemimpin & Perintis",
-                desc: "Energi kemandirian, inisiatif, dan kepemimpinan. Anda didorong untuk berdiri di atas kaki sendiri, orisinal, dan berani mengambil jalan yang berbeda dari orang lain.",
-                lesson: "Belajar percaya diri dan tidak bergantung pada orang lain."
-            },
-            2: {
-                keyword: "Diplomat & Pasangan",
-                desc: "Energi kerja sama, kepekaan, dan harmoni. Kekuatan Anda terletak pada detail, intuisi, dan kemampuan menyatukan orang. Anda adalah pembawa damai.",
-                lesson: "Belajar menetapkan batasan dan tidak terlalu sensitif."
-            },
-            3: {
-                keyword: "Komunikator & Kreator",
-                desc: "Energi ekspresi diri, kegembiraan, dan kreativitas. Anda memiliki bakat dalam kata-kata, seni, dan menghibur orang lain. Pesona sosial Anda tinggi.",
-                lesson: "Belajar fokus dan tidak menyebarkan energi terlalu tipis."
-            },
-            4: {
-                keyword: "Pembangun & Praktisi",
-                desc: "Energi stabilitas, kerja keras, dan sistem. Anda adalah fondasi yang kokoh, disiplin, dan terorganisir. Anda mewujudkan ide menjadi bentuk nyata.",
-                lesson: "Belajar fleksibel dan tidak terlalu kaku."
-            },
-            5: {
-                keyword: "Petualang & Pembebas",
-                desc: "Energi kebebasan, perubahan, dan adaptabilitas. Anda menyukai variasi, travel, dan pengalaman baru. Rutinitas adalah musuh Anda.",
-                lesson: "Belajar disiplin diri dan komitmen."
-            },
-            6: {
-                keyword: "Pengasuh & Harmoni",
-                desc: "Energi tanggung jawab, keluarga, dan pelayanan. Anda berorientasi pada rumah, menyembuhkan, dan menjaga keharmonisan komunitas.",
-                lesson: "Belajar tidak terlalu mencampuri urusan orang lain (perfeksionisme)."
-            },
-            7: {
-                keyword: "Pencari & Pemikir",
-                desc: "Energi analisis, spiritualitas, dan introspeksi. Anda mencari kebenaran terdalam. Anda butuh waktu sendiri untuk mengisi ulang energi.",
-                lesson: "Belajar mempercayai intuisi dan terbuka pada orang lain."
-            },
-            8: {
-                keyword: "Eksekutif & Kekuasaan",
-                desc: "Energi ambisi, uang, dan otoritas. Anda memiliki bakat manajemen dan visi besar. Tujuan Anda adalah kesuksesan materi yang seimbang.",
-                lesson: "Belajar menyeimbangkan materi dan spiritual."
-            },
-            9: {
-                keyword: "Humanis & Penutup",
-                desc: "Energi kasih sayang universal, kedermawanan, dan penyelesaian. Anda peduli pada gambaran besar dan kesejahteraan banyak orang.",
-                lesson: "Belajar melepaskan masa lalu dan memberi tanpa pamrih."
-            },
-            11: {
-                keyword: "Master Illuminator",
-                desc: "Intuisi tingkat tinggi dan pencerahan spiritual. Anda di sini untuk menginspirasi orang lain melalui visi idealis Anda.",
-                lesson: "Menyeimbangkan saraf yang tegang dengan grounding."
-            },
-            22: {
-                keyword: "Master Builder",
-                desc: "Potensi mewujudkan mimpi besar menjadi kenyataan nyata untuk kemaslahatan banyak orang. Gabungan visi idealis dan praktikalitas.",
-                lesson: "Mengatasi ketakutan akan kegagalan besar."
-            },
-            33: {
-                keyword: "Master Teacher",
-                desc: "Energi pengabdian dan cinta kasih tanpa syarat. Anda adalah penyembuh kosmik yang mengajarkan cinta melalui teladan.",
-                lesson: "Tidak mengorbankan diri sendiri secara berlebihan."
-            }
+            1: { keyword: "Pemimpin & Perintis", desc: "Energi kemandirian, inisiatif, dan kepemimpinan. Anda didorong untuk berdiri di atas kaki sendiri, orisinal, dan berani mengambil jalan yang berbeda dari orang lain.", lesson: "Belajar percaya diri dan tidak bergantung pada orang lain." },
+            2: { keyword: "Diplomat & Pasangan", desc: "Energi kerja sama, kepekaan, dan harmoni. Kekuatan Anda terletak pada detail, intuisi, dan kemampuan menyatukan orang. Anda adalah pembawa damai.", lesson: "Belajar menetapkan batasan dan tidak terlalu sensitif." },
+            3: { keyword: "Komunikator & Kreator", desc: "Energi ekspresi diri, kegembiraan, dan kreativitas. Anda memiliki bakat dalam kata-kata, seni, dan menghibur orang lain. Pesona sosial Anda tinggi.", lesson: "Belajar fokus dan tidak menyebarkan energi terlalu tipis." },
+            4: { keyword: "Pembangun & Praktisi", desc: "Energi stabilitas, kerja keras, dan sistem. Anda adalah fondasi yang kokoh, disiplin, dan terorganisir. Anda mewujudkan ide menjadi bentuk nyata.", lesson: "Belajar fleksibel dan tidak terlalu kaku." },
+            5: { keyword: "Petualang & Pembebas", desc: "Energi kebebasan, perubahan, dan adaptabilitas. Anda menyukai variasi, travel, dan pengalaman baru. Rutinitas adalah musuh Anda.", lesson: "Belajar disiplin diri dan komitmen." },
+            6: { keyword: "Pengasuh & Harmoni", desc: "Energi tanggung jawab, keluarga, dan pelayanan. Anda berorientasi pada rumah, menyembuhkan, dan menjaga keharmonisan komunitas.", lesson: "Belajar tidak terlalu mencampuri urusan orang lain (perfeksionisme)." },
+            7: { keyword: "Pencari & Pemikir", desc: "Energi analisis, spiritualitas, dan introspeksi. Anda mencari kebenaran terdalam. Anda butuh waktu sendiri untuk mengisi ulang energi.", lesson: "Belajar mempercayai intuisi dan terbuka pada orang lain." },
+            8: { keyword: "Eksekutif & Kekuasaan", desc: "Energi ambisi, uang, dan otoritas. Anda memiliki bakat manajemen dan visi besar. Tujuan Anda adalah kesuksesan materi yang seimbang.", lesson: "Belajar menyeimbangkan materi dan spiritual." },
+            9: { keyword: "Humanis & Penutup", desc: "Energi kasih sayang universal, kedermawanan, dan penyelesaian. Anda peduli pada gambaran besar dan kesejahteraan banyak orang.", lesson: "Belajar melepaskan masa lalu dan memberi tanpa pamrih." },
+            11: { keyword: "Master Illuminator", desc: "Intuisi tingkat tinggi dan pencerahan spiritual. Anda di sini untuk menginspirasi orang lain melalui visi idealis Anda.", lesson: "Menyeimbangkan saraf yang tegang dengan grounding." },
+            22: { keyword: "Master Builder", desc: "Potensi mewujudkan mimpi besar menjadi kenyataan nyata untuk kemaslahatan banyak orang. Gabungan visi idealis dan praktikalitas.", lesson: "Mengatasi ketakutan akan kegagalan besar." },
+            33: { keyword: "Master Teacher", desc: "Energi pengabdian dan cinta kasih tanpa syarat. Anda adalah penyembuh kosmik yang mengajarkan cinta melalui teladan.", lesson: "Tidak mengorbankan diri sendiri secara berlebihan." }
         };
+
+        // --- DATA BARU: PINNACLE & CHALLENGE ---
+        const pinnacleMeanings = {
+            1: "Periode Mandiri. Waktunya memimpin, berdiri sendiri, dan memulai hal baru.",
+            2: "Periode Diplomasi. Sukses lewat kerjasama, detail, dan kepekaan rasa.",
+            3: "Periode Kreatif. Waktunya berekspresi, menulis, seni, dan bersosialisasi.",
+            4: "Periode Kerja Keras. Waktunya membangun fondasi, disiplin, dan ketertiban.",
+            5: "Periode Kebebasan. Banyak perubahan mendadak, travel, dan adaptasi.",
+            6: "Periode Keluarga. Fokus pada rumah tangga, pernikahan, dan tanggung jawab.",
+            7: "Periode Introspeksi. Waktu untuk menyendiri, belajar spiritual, dan analisis.",
+            8: "Periode Kesuksesan. Fokus pada karir, uang, bisnis, dan kekuasaan.",
+            9: "Periode Pengabdian. Melayani orang banyak, beramal, dan melepas masa lalu.",
+            11: "Periode Pencerahan (Master). Menjadi inspirasi spiritual bagi orang lain.",
+            22: "Periode Membangun Besar (Master). Mewujudkan mimpi besar bagi dunia."
+        };
+
+        const challengeMeanings = {
+            0: "Tantangan Pilihan. Bingung memilih arah hidup karena merasa bisa segalanya.",
+            1: "Tantangan Ego. Belajar tegas tanpa menjadi sombong atau dominan.",
+            2: "Tantangan Sensitivitas. Belajar tidak mudah tersinggung (baperan).",
+            3: "Tantangan Fokus. Belajar tidak membuang energi dan menyembunyikan perasaan.",
+            4: "Tantangan Disiplin. Belajar menyukai keteraturan dan tidak malas.",
+            5: "Tantangan Impulsif. Belajar komitmen dan tidak lari dari masalah.",
+            6: "Tantangan Perfeksionis. Belajar menerima kekurangan orang lain/keluarga.",
+            7: "Tantangan Skeptis. Belajar mempercayai diri sendiri dan Tuhan (iman).",
+            8: "Tantangan Materi. Belajar tidak menilai segala sesuatu dari uang."
+        };
+    
 
         const karmicDebtsText = {
             13: "Hutang Kerja Keras (13/4): Arti Masa Lalu: Indikasi bahwa di masa lalu ada kecenderungan bermalas-malasan atau melimpahkan tanggung jawab. Tantangan: Hidup terasa lebih berat, banyak rintangan berulang. Pelajaran: Disiplin, Fokus, dan Kerja Keras tanpa jalan pintas.",
@@ -312,6 +293,26 @@
                     ${getMeaning(resObj.val, 'general')}
                 </div>
                 ${karmicHtml}
+            </div>`;
+        }
+
+        // --- FUNGSI BARU: GENERATOR DESKRIPSI (Diletakkan di luar calculateDeepProfile) ---
+        function generateCycleDesc(phaseName, ageRange, pVal, cVal) {
+            return `
+            <div style="margin-bottom: 25px;">
+                <h4 style="color:var(--gold-light); margin-bottom:5px; border-left:3px solid var(--gold-accent); padding-left:10px;">
+                    ${phaseName} (Usia ${ageRange})
+                </h4>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; font-size:0.9rem;">
+                    <div style="background:rgba(255,255,255,0.05); padding:10px; border-radius:5px;">
+                        <strong style="color:var(--gold-accent);">🚀 Puncak ${pVal}:</strong><br>
+                        ${pinnacleMeanings[pVal] || "Energi transisi."}
+                    </div>
+                    <div style="background:rgba(255,100,100,0.1); padding:10px; border-radius:5px;">
+                        <strong style="color:var(--red-karmic);">🔥 Tantangan ${cVal}:</strong><br>
+                        ${challengeMeanings[cVal] || "Tantangan unik."}
+                    </div>
+                </div>
             </div>`;
         }
 
@@ -415,17 +416,18 @@
                 </div>`;
                 document.getElementById('timingResults').innerHTML = timingHtml;
 
-                // 8. RENDER PINNACLES TABLE
+                // 8. RENDER PINNACLES TABLE (FIXED LOGIC)
                 const bM = reduce(M,false).val; const bD = reduce(D,false).val; const bY = reduce(Y,false).val;
                 const p1 = reduce(bM+bD).val; const p2 = reduce(bD+bY).val; const p3 = reduce(p1+p2).val; const p4 = reduce(bM+bY).val;
                 const c1 = Math.abs(bM-bD); const c2 = Math.abs(bD-bY); const c3 = Math.abs(c1-c2); const c4 = Math.abs(bM-bY);
                 
                 let lpD = reduce(lpVal.val, false).val;
-                if(lpD === 0) lpD = 1; // Safety catch if LP is 0
+                if(lpD === 0) lpD = 1; 
                 const a1 = 36 - lpD; 
                 const a2 = a1 + 9; 
                 const a3 = a2 + 9;
 
+                // PERBAIKAN: Pisahkan pembuatan string HTML
                 document.getElementById('pinnacleBody').innerHTML = `
                     <tr><td>Pinnacle 1</td><td>0 - ${a1}</td><td>${p1}</td><td>${c1}</td></tr>
                     <tr><td>Pinnacle 2</td><td>${a1+1} - ${a2}</td><td>${p2}</td><td>${c2}</td></tr>
@@ -433,13 +435,22 @@
                     <tr><td>Pinnacle 4</td><td>${a3+1}+</td><td>${p4}</td><td>${c4}</td></tr>
                 `;
 
+                // GENERATE DETAIL SIKLUS (Kode yang tadi nyangkut dipindah ke sini)
+                let details = "";
+                details += generateCycleDesc("Fase 1: Masa Pembentukan", `0 - ${a1} Tahun`, p1, c1);
+                details += generateCycleDesc("Fase 2: Masa Produktif", `${a1+1} - ${a2} Tahun`, p2, c2);
+                details += generateCycleDesc("Fase 3: Masa Kematangan", `${a2+1} - ${a3} Tahun`, p3, c3);
+                details += generateCycleDesc("Fase 4: Masa Kebijaksanaan", `${a3+1}+ Tahun`, p4, c4);
+                
+                document.getElementById('cycleList').innerHTML = details;
+
                 // 9. TAMPILKAN HASIL
                 document.getElementById('resultArea').style.display = 'block';
                 window.scrollTo({top: document.getElementById('resultArea').offsetTop - 50, behavior:'smooth'});
 
             } catch (error) {
                 console.error(error);
-                alert("Terjadi kesalahan: " + error.message + "\n\nCoba cek konsol browser atau kirim pesan error ini.");
+                alert("Terjadi kesalahan: " + error.message);
             }
         }
     </script>
